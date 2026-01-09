@@ -25,9 +25,9 @@ pinned: false
 
 ## 💎 Project Overview
 
-**ScentSational AI Core** is the backend intelligence engine designed to revolutionize fragrance discovery. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent.
+**ScentSational AI Core** is the backend intelligence engine designed to revolutionize fragrance discovery. This repository serves as the computational brain, separating heavy logic from the visual presentation layer.
 
-This repository serves as the computational brain, separating heavy logic from the visual presentation layer.
+It utilizes **Semantic Search** and **Natural Language Processing (NLP)** to translate abstract concepts (e.g., *"woody notes with a luxury vibe"*) into mathematical vectors.
 
 ---
 
@@ -45,17 +45,11 @@ This project is part of a dual-repository architecture designed for scalability 
 
 ## 🛠️ Key Features & Tech Stack
 
-This engine translates abstract concepts (e.g., *"woody notes with a luxury vibe"*) into mathematical vectors using state-of-the-art ML libraries.
-
 * **Python 3.9+** & **Streamlit**: Core framework.
-* **Sentence-Transformers (SBERT)**:
-    * *Role:* Generates dense vector representations of perfume notes.
-* **Cosine Similarity**:
-    * *Role:* Calculates mathematical distance between scent profiles.
-* **Numpy & Pickle**:
-    * *Role:* Efficient storage of pre-computed similarity matrices (~500MB+ data).
-* **Git LFS (Large File Storage)**:
-    * *Role:* Hosting heavy model artifacts required for inference.
+* **Sentence-Transformers (SBERT)**: Generates dense vector representations of perfume notes.
+* **Cosine Similarity**: Calculates mathematical distance between scent profiles.
+* **Numpy & Pickle**: Efficient storage of pre-computed similarity matrices.
+* **Git LFS**: Hosting heavy model artifacts required for inference.
 
 ---
 
