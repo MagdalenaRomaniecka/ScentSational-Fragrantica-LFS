@@ -11,63 +11,82 @@ pinned: false
 
 <div align="center">
 
-# SCENTSATIONAL | AI CORE (LFS)
+# ✨ ScentSational | AI Core
 
-### 🧠 The Neural Engine Behind the Atelier
+### The Intelligence Platform. Unlock the chemical DNA of scent.
 
-*Machine Learning Backend • Large File Storage • Hugging Face Integration*
+[![Open in Spaces](https://huggingface.co/datasets/huggingface/badges/raw/main/open-in-hf-spaces-md-dark.svg)](https://huggingface.co/spaces/Baphomert/ScentSational-Fragrantica-LFS2)
+&nbsp;
+[![Visit Atelier Dashboard](https://img.shields.io/badge/VISIT_MAIN_ATELIER-000000?style=for-the-badge&logo=github&logoColor=D4AF37&color=1a1a1a)](https://github.com/MagdalenaRomaniecka/ScentSational)
+
+<br>
+
+<img src="https://via.placeholder.com/800x1/D4AF37/000000?text=+" alt="Divider" width="80%">
+
+</div>
+
+## 💎 Project Overview
+
+**ScentSational AI Core** is the backend intelligence engine designed to revolutionize fragrance discovery. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent.
+
+This repository serves as the computational brain, separating heavy logic from the visual presentation layer.
 
 ---
 
-### 📐 System Architecture
+## 📐 Architecture & Ecosystem
 
-This repository serves as the **Computation Backend** for the [ScentSational Atelier](https://github.com/MagdalenaRomaniecka/ScentSational) ecosystem. While the main dashboard handles visualization and user experience, this Core handles the heavy lifting: vector embeddings and similarity calculations.
+This project is part of a dual-repository architecture designed for scalability and clean code separation.
 
-| **PROJECT PART A: THE FACE** | **PROJECT PART B: THE BRAIN (You are here)** |
-| :---: | :---: |
-| [**ScentSational Atelier**](https://github.com/MagdalenaRomaniecka/ScentSational) | **ScentSational AI Core** |
-| Interactive Streamlit Dashboard | Hugging Face Space & LFS Storage |
+| **PART A: THE FACE (Frontend)** | **PART B: THE BRAIN (Backend)** |
+| :--- | :--- |
+| [**ScentSational Atelier**](https://github.com/MagdalenaRomaniecka/ScentSational) | **ScentSational AI Core (This Repo)** |
+| 🎨 Interactive Streamlit Dashboard | 🧠 Hugging Face Space & LFS Storage |
 | **Presentation Layer** | **Computation Layer** |
 
 ---
 
-### ⚙️ Technical Specifications
+## 🛠️ Key Features & Tech Stack
 
-This engine utilizes **Natural Language Processing (NLP)** to analyze olfactory profiles, translating abstract concepts (e.g., "woody notes", "luxury vibe") into mathematical vectors.
+This engine translates abstract concepts (e.g., *"woody notes with a luxury vibe"*) into mathematical vectors using state-of-the-art ML libraries.
 
-**Core Technologies:**
-`Python` • `Git LFS` • `Hugging Face Spaces`
-
-**Machine Learning Stack:**
-* **Sentence-Transformers (SBERT):** For generating dense vector representations of perfume notes.
-* **Cosine Similarity:** For calculating the mathematical distance between scent profiles.
-* **Numpy:** For efficient storage of pre-computed matrices.
+* **Python 3.9+** & **Streamlit**: Core framework.
+* **Sentence-Transformers (SBERT)**:
+    * *Role:* Generates dense vector representations of perfume notes.
+* **Cosine Similarity**:
+    * *Role:* Calculates mathematical distance between scent profiles.
+* **Numpy & Pickle**:
+    * *Role:* Efficient storage of pre-computed similarity matrices (~500MB+ data).
+* **Git LFS (Large File Storage)**:
+    * *Role:* Hosting heavy model artifacts required for inference.
 
 ---
 
-### 📂 LFS Data Structure
+## 📂 Data Source & LFS Structure
 
-Due to GitHub's file size limits, this repository uses **Git LFS** (Large File Storage) to host heavy model artifacts required for AI inference.
+Due to GitHub's file size limits, this repository uses **Git LFS** to host artifacts.
 
 | File Name | Description | Role |
 | :--- | :--- | :--- |
-| `scent_embeddings.pkl` | Vectorized representation of 40,000+ perfumes | **Semantic Database** |
-| `hybrid_similarity.npy` | Pre-computed similarity matrix | **Instant Search Cache** |
-| `perfumes_dataset.csv` | Raw metadata (Brand, Notes, Ratings) | **Source Data** |
+| `scent_embeddings.pkl` | Vectorized representation of 40k+ perfumes | **Semantic Database** |
+| `scentsational_data.csv` | Raw metadata (Brand, Notes, Ratings) | **Source Data** |
 
----
+> **Note:** This project utilizes the Fragrantica Dataset sourced from Kaggle.
 
-### 🚀 Deployment & Integration
-
-This core is deployed as a microservice on **Hugging Face Spaces**, exposing an interface that the main dashboard interacts with.
-
-[🔗 Visit Main Dashboard (Atelier)](https://github.com/MagdalenaRomaniecka/ScentSational)
-
+<br>
 <br>
 
 <div align="center">
-    <img src="https://via.placeholder.com/800x20/D4AF37/000000?text=+" alt="Footer Line" width="100%">
-    <p style="color:#666; font-size: 10px;">ENGINEERED BY MAGDALENA ROMANIECKA • 2026</p>
-</div>
+
+<img src="https://via.placeholder.com/800x1/333333/000000?text=+" alt="Divider" width="100%">
+
+### 👩‍💻 Author
+
+**Created by Magdalena Romaniecka**
+<br>
+*Data Analyst & Web Analytics Enthusiast*
+
+<br>
+
+© 2026 | Built with 💚 and Python
 
 </div>
