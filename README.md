@@ -11,7 +11,7 @@ pinned: false
 
 <div align="center">
 
-# ✨ ScentSational | AI Core
+# ✨ SCENTSATIONAL | AI CORE
 
 ### The Intelligence Platform. Unlock the chemical DNA of scent.
 
@@ -19,11 +19,9 @@ pinned: false
 &nbsp;
 [![Visit Atelier Dashboard](https://img.shields.io/badge/VISIT_MAIN_ATELIER-000000?style=for-the-badge&logo=github&logoColor=D4AF37&color=1a1a1a)](https://github.com/MagdalenaRomaniecka/ScentSational)
 
-<br>
-
-<img src="https://via.placeholder.com/800x1/D4AF37/000000?text=+" alt="Divider" width="80%">
-
 </div>
+
+---
 
 ## 💎 Project Overview
 
@@ -72,12 +70,9 @@ Due to GitHub's file size limits, this repository uses **Git LFS** to host artif
 
 > **Note:** This project utilizes the Fragrantica Dataset sourced from Kaggle.
 
-<br>
-<br>
+---
 
 <div align="center">
-
-<img src="https://via.placeholder.com/800x1/333333/000000?text=+" alt="Divider" width="100%">
 
 ### 👩‍💻 Author
 
