@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+import re
 from sentence_transformers import SentenceTransformer, util
 
 # --- 1. CONFIGURATION ---
@@ -8,10 +9,10 @@ st.set_page_config(
     page_title="ScentSational | AI Core",
     page_icon="✨",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="collapsed"
 )
 
-# --- 2. LUXURY CSS (THE ATELIER TWIN + EMBLEMS) ---
+# --- 2. LUXURY CSS (THE ATELIER TWIN + COMPACT MOBILE) ---
 st.markdown("""
     <style>
     /* IMPORT FONTS */
@@ -82,17 +83,43 @@ st.markdown("""
         font-style: italic;
     }
 
-    /* --- SIDEBAR --- */
+    /* --- SIDEBAR COMPACTING --- */
     section[data-testid="stSidebar"] {
         background-color: #080808 !important;
         border-right: 1px solid rgba(212, 175, 55, 0.15);
     }
+    section[data-testid="stSidebar"] .block-container {
+        padding-top: 2rem !important;
+        padding-bottom: 1rem !important;
+    }
+    section[data-testid="stSidebar"] .stElementContainer {
+        margin-bottom: 0.5rem !important;
+    }
+    
     .stSelectbox div[data-baseweb="select"] > div {
         border: 1px solid rgba(212, 175, 55, 0.4) !important;
         background-color: rgba(10, 10, 10, 0.8) !important;
         color: #fff !important;
+        min-height: 38px !important;
     }
-    .stSelectbox label { display: block !important; color: #D4AF37 !important; font-size: 0.7rem !important; text-transform: uppercase; letter-spacing: 1px;}
+    .stSelectbox label { 
+        display: block !important; 
+        color: #D4AF37 !important; 
+        font-size: 0.65rem !important;
+        text-transform: uppercase; 
+        letter-spacing: 1px;
+        margin-bottom: 2px !important;
+    }
+    
+    /* Dropdown Options */
+    div[data-baseweb="popover"], div[data-baseweb="menu"], ul {
+        background-color: #080808 !important;
+        border: 1px solid #333 !important;
+    }
+    li[aria-selected="true"] {
+        background-color: #222 !important;
+        color: #D4AF37 !important;
+    }
 
     /* --- SEARCH INPUT --- */
     .stTextInput > div > div > input {
@@ -231,6 +258,7 @@ def load_data():
         df = pd.read_csv('scentsational_data.csv', sep=None, engine='python', encoding='latin1')
         df.columns = df.columns.str.strip()
         
+        # MAPPING
         cols = df.columns.tolist()
         brand_col = next((c for c in cols if 'brand' in c.lower()), 'Brand')
         name_col = next((c for c in cols if 'perfume' in c.lower() or 'name' in c.lower()), 'Name')
@@ -292,13 +320,29 @@ df, embeddings, model = load_data()
 
 # --- 4. SIDEBAR ---
 with st.sidebar:
-    st.markdown("<p style='color:#D4AF37; font-size:0.8rem; font-weight:bold; letter-spacing:2px; text-align:center;'>SETTINGS</p>", unsafe_allow_html=True)
+    st.markdown("<p style='color:#D4AF37; font-size:0.7rem; font-weight:bold; letter-spacing:2px; text-align:center; margin-bottom:5px;'>SETTINGS</p>", unsafe_allow_html=True)
     
+    # 1. GENDER
     gender_option = "All"
     if df is not None:
         genders = ["All"] + sorted([g for g in df['Gender'].astype(str).unique() if g != 'nan'])
         gender_option = st.selectbox("Gender", genders)
     
+    # 2. RATING FILTER (SIMPLIFIED & REORDERED)
+    rating_options = {
+        0.0: "Any Rating (Show All)",
+        4.0: "★ 4.0+",
+        3.0: "★ 3.0+",
+        2.0: "★ 2.0+",
+        1.0: "★ 1.0+"
+    }
+    rating_labels = list(rating_options.values())
+    default_idx = 0
+    
+    selected_label = st.selectbox("Minimum Rating Score", rating_labels, index=default_idx)
+    min_rating = [k for k, v in rating_options.items() if v == selected_label][0]
+    
+    # 3. NOTES
     note_search = "All Notes"
     if df is not None:
          all_notes = ','.join(df['Main Accords'].astype(str)).replace('nan','').split(',')
@@ -308,12 +352,11 @@ with st.sidebar:
             top_notes.sort()
             note_search = st.selectbox("Dominant Note", ["All Notes"] + top_notes)
 
-    st.write("")
     st.markdown("---")
     st.markdown(f"""
     <div style="text-align:center;">
-        <a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" style="color:#888; text-decoration:none; font-size:0.7rem; letter-spacing:1px; display:block; margin-bottom:10px;">OPEN ATELIER APP</a>
-        <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" style="color:#888; text-decoration:none; font-size:0.7rem; letter-spacing:1px; display:block;">VIEW ON GITHUB</a>
+        <a href="https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/" target="_blank" style="color:#888; text-decoration:none; font-size:0.6rem; letter-spacing:1px; display:block; margin-bottom:5px;">OPEN ATELIER APP</a>
+        <a href="https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS" target="_blank" style="color:#888; text-decoration:none; font-size:0.6rem; letter-spacing:1px; display:block;">VIEW ON GITHUB</a>
     </div>
     """, unsafe_allow_html=True)
 
@@ -321,24 +364,25 @@ with st.sidebar:
 st.markdown("<h1>SCENTSATIONAL</h1>", unsafe_allow_html=True)
 st.markdown('<div class="sub-header">The Intelligence Platform</div>', unsafe_allow_html=True)
 
+# INTRO TEXT
 st.markdown("""
 <div class="intro-text">
     Unlock the chemical DNA of scent.<br>
-    Describe a memory, mood, or vibe to find your perfect match.
+    Describe a <b>specific note harmony</b>, a <b>fleeting memory</b>, or a <b>vivid mood</b>.
 </div>
 <div class="intro-hint">
-    Try: "Old library with cognac", "Walk in a rainy forest", "Clean laundry and sunshine", or "Dark spicy vanilla".
+    Try: "Old library with cognac", "Walk in a rainy forest", "Warm Spicy Vanilla", or "Fresh Citrus & Wood".
 </div>
 """, unsafe_allow_html=True)
 
 with st.expander("👁️ How AI Matches Vibe? (Click to learn)"):
     st.markdown("""
     <div style="text-align:center; color:#AAA; font-size:0.8rem; line-height:1.6;">
-        This AI engine uses <b>Semantic Search</b>. It understands the "meaning" of your request, not just keywords.<br><br>
-        For example: If you type <i>"Like a Witch"</i>, the AI looks for scents associated with <b>magic, mystery, or eccentricity</b>. 
-        It might suggest a perfume named <i>"Wicked"</i> or a brand known for avant-garde styles, even if the notes are floral.
-        <br><br>
-        <b>The Match Score</b> indicates how conceptually close the perfume's profile is to your description.
+        <b>Smart Precision Search:</b><br><br>
+        1. <b>Precision Match:</b> We score every word. "Warm Vanilla" ranks higher than just "Vanilla".<br>
+        2. <b>Vibe Match:</b> AI Analysis of the concept/feeling (e.g. "Mysterious").<br>
+        3. <b>Visual Match:</b> Names matching your description.<br>
+        <i>*Results are filtered by your rating preference in the sidebar.</i>
     </div>
     """, unsafe_allow_html=True)
 
@@ -347,46 +391,57 @@ query = st.text_input("Search", placeholder="Type your olfactory vision here..."
 if query and df is not None:
     st.write("")
     with st.spinner("Decoding Vibe..."):
-        # 1. AI Search
+        # 1. AI Search (Wide Net)
         query_vec = model.encode(query, convert_to_tensor=True)
-        hits = util.semantic_search(query_vec, embeddings, top_k=60) # Increased pool
+        hits = util.semantic_search(query_vec, embeddings, top_k=80) 
         
         st.markdown(f"<div style='text-align:center; color:#666; font-size:0.7rem; letter-spacing:2px; margin-bottom:30px; text-transform:uppercase;'>Olfactory Matches: <i>'{query}'</i></div>", unsafe_allow_html=True)
         
         # 2. Process
         processed_results = []
-        # Create a set of words from query for simple boosting
-        query_words = set(query.lower().split())
+        query_words = set(re.split(r'\W+', query.lower()))
+        query_words = {w for w in query_words if len(w) > 2} 
 
         for hit in hits[0]:
             idx = hit['corpus_id']
             row = df.iloc[idx]
             
+            # FILTERS
             if gender_option != "All" and str(row['Gender']) != str(gender_option): continue
             if note_search != "All Notes" and note_search.lower() not in str(row['Main Accords']).lower(): continue
             
-            # --- HYBRID LOGIC ---
-            # Check if any query word exists in notes (Keyword Boost)
+            # RATING CHECK
+            rating_val = float(row.get('Rating Value', 0))
+            if rating_val < min_rating: continue
+            
+            # --- HIERARCHY LOGIC V10.0 ---
+            
+            # 1. Complex Match
             notes_text = str(row['Main Accords']).lower()
-            keyword_bonus = 0
+            match_count = 0
             for word in query_words:
-                if len(word) > 2 and word in notes_text:
-                    keyword_bonus = 1 # Flag found
+                if word in notes_text:
+                    match_count += 1
+            
+            # 2. Visual Match
+            name_text = (str(row['Name']) + " " + str(row['Brand'])).lower()
+            name_match = 0
+            for word in query_words:
+                if word in name_text:
+                    name_match = 1
             
             row['ai_score'] = hit['score']
-            row['keyword_bonus'] = keyword_bonus
+            row['match_count'] = match_count
+            row['name_match'] = name_match
             processed_results.append(row)
             
-        # 3. SORTING STRATEGY:
-        # Priority 1: Has the keyword matched? (e.g. user typed "Rose" and scent has Rose)
-        # Priority 2: Rating (Quality)
-        # Priority 3: AI Score
-        processed_results.sort(key=lambda x: (x['keyword_bonus'], float(x.get('Rating Value', 0))), reverse=True)
+        # 3. SORTING STRATEGY
+        processed_results.sort(key=lambda x: (x['match_count'], x['ai_score'], x['name_match'], float(x.get('Rating Value', 0))), reverse=True)
         
-        display_results = processed_results[:9]
+        display_results = processed_results[:15]
         
         if not display_results:
-             st.warning("No matches found. Try relaxing the filters.")
+             st.warning(f"No matches found with Rating {min_rating}+. Try lowering the rating filter.")
         else:
             col1, col2, col3 = st.columns([1,1,1])
             cols = [col1, col2, col3]
@@ -419,7 +474,7 @@ if query and df is not None:
 # --- 6. FOOTER ---
 st.markdown("""
 <div class="custom-footer">
-    ScentSational AI Core v4.1 &bull; Developed by Magdalena Romaniecka &bull; 2026<br>
+    ScentSational AI Core v12.0 &bull; Developed by Magdalena Romaniecka &bull; 2026<br>
     Data Source: <a href="https://www.kaggle.com/datasets/olgagmiufana1/fragrantica-com-fragrance-dataset" target="_blank">Fragrantica Dataset (Kaggle)</a> &bull; Powered by Hugging Face
 </div>
 """, unsafe_allow_html=True)
