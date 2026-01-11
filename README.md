@@ -69,7 +69,7 @@ pip install -r requirements.txt
 streamlit run app.py
 
 ---
-
+```
 ## 📂 Data Source & LFS Structure
 
 Due to GitHub's file size limits, this repository uses **Git LFS** to host artifacts.
