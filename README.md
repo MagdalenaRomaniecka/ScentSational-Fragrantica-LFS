@@ -50,9 +50,24 @@ This engine translates abstract concepts into mathematical vectors using state-o
 * **Sentence-Transformers (SBERT)**: Generates dense vector representations (embeddings) of perfume notes.
 * **Cosine Similarity**: Calculates the mathematical distance between scent profiles to find the nearest neighbors.
 * **Git LFS (Large File Storage)**: Used to host heavy model artifacts required for inference.
+* **Stack**: Python 3.9+, Streamlit, Pandas, Numpy, Scikit-Learn.
 
 ---
 
+## 💻 Installation & Usage
+
+To run this backend engine locally:
+
+```bash
+# 1. Clone the repository (ensure Git LFS is installed)
+git clone [https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS.git](https://github.com/MagdalenaRomaniecka/ScentSational-Fragrantica-LFS.git)
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Run the application
+streamlit run app.py
+'''
 ## 📂 Data Source & LFS Structure
 
 Due to GitHub's file size limits, this repository uses **Git LFS** to host artifacts.
