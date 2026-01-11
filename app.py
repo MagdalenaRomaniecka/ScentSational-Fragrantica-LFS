@@ -183,8 +183,8 @@ def get_initials(brand_name):
 def load_data():
     """Loads the main CSV dataset."""
     try:
-        # FIX: Added encoding='latin1' to handle special characters (e.g. accents)
-        df = pd.read_csv("scentsational_data.csv", encoding='latin1') 
+        # FIX: Added on_bad_lines='skip' to ignore broken rows in CSV
+        df = pd.read_csv("scentsational_data.csv", encoding='latin1', on_bad_lines='skip') 
         return df
     except Exception as e:
         st.error(f"Error loading data: {e}")
