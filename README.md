@@ -24,6 +24,7 @@ pinned: false
 ---
 
 ## 💎 Project Overview
+
 **ScentSational AI Core** is a machine learning service designed for semantic perfume search. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent (e.g., *"dark, woody notes with a luxury feel"*).
 This repository acts as a dedicated computation engine, isolating complex data processing from the user interface.
 ---
