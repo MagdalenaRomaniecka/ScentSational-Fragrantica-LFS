@@ -24,11 +24,8 @@ pinned: false
 ---
 
 ## 💎 Project Overview
-
-**ScentSational AI Core** is the backend intelligence engine designed to revolutionize fragrance discovery. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent (e.g., *"dark, woody notes with a luxury feel"*).
-
-This repository serves as the computational brain, separating heavy logic from the visual presentation layer.
-
+**ScentSational AI Core** is a machine learning service designed for semantic perfume search. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent (e.g., *"dark, woody notes with a luxury feel"*).
+This repository acts as a dedicated computation engine, isolating complex data processing from the user interface.
 ---
 
 ## 📐 Architecture & Ecosystem
@@ -47,9 +44,9 @@ This project is part of a dual-repository architecture designed for scalability 
 
 This engine translates abstract concepts into mathematical vectors using state-of-the-art ML libraries.
 
-* **Sentence-Transformers (SBERT)**: Generates dense vector representations (embeddings) of perfume notes.
-* **Cosine Similarity**: Calculates the mathematical distance between scent profiles to find the nearest neighbors.
-* **Git LFS (Large File Storage)**: Used to host heavy model artifacts required for inference.
+* **Sentence-Transformers (SBERT):** Transforms perfume note descriptions into semantic vectors, preserving their context.
+* **Cosine Similarity:** Measures the alignment between scent profiles to identify the most relevant matches.
+* **Git LFS (Large File Storage):** Handles the storage of large model files essential for generating recommendations.
 * **Stack**: Python 3.9+, Streamlit, Pandas, Numpy, Scikit-Learn.
 
 ---
