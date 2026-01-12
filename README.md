@@ -1,23 +1,16 @@
-# The Intelligence Platform. Unlock the chemical DNA of scent.
-
-[![Hugging Face Spaces](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Open%20in%20Spaces-blue)](https://huggingface.co/spaces/Baphomert/ScentSational-Fragrantica-LFS2)
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://scentsational-zbznjhgc4xv7faddappdc2b.streamlit.app/)
-
+---
+title: ScentSational AI Core
+emoji: 🧠
+colorFrom: yellow
+colorTo: gray
+sdk: streamlit
+sdk_version: 1.39.0
+app_file: app.py
+pinned: false
 ---
 
----
+<div align="center">
 
-### 💎 Project Overview
-
-**ScentSational AI Core** is a machine learning service designed for semantic perfume search. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent (e.g., *"dark, woody notes with a luxury feel"*).
-
-This repository acts as a dedicated computation engine, isolating complex data processing from the user interface.
-
----
-
-This repository acts as a dedicated computation engine, isolating complex data processing from the user interface.
-
----
 # ✨ SCENTSATIONAL | AI CORE
 
 ### The Intelligence Platform. Unlock the chemical DNA of scent.
@@ -30,10 +23,12 @@ This repository acts as a dedicated computation engine, isolating complex data p
 
 ---
 
-## 💎 Project Overview
+### 💎 Project Overview
 
 **ScentSational AI Core** is a machine learning service designed for semantic perfume search. Unlike traditional filters that rely solely on checkboxes, this engine uses **Semantic Search** and **Natural Language Processing (NLP)** to understand the *vibe* of a scent (e.g., *"dark, woody notes with a luxury feel"*).
+
 This repository acts as a dedicated computation engine, isolating complex data processing from the user interface.
+
 ---
 
 ## 📐 Architecture & Ecosystem
